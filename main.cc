@@ -3,25 +3,27 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void readpipe(int file) {
+void readpipe(int file, std::string myarg) {
 FILE *stream;
-std::string c;
+std::string *c;
 stream =fdopen (file, "r");
-while ((c = fgets (stream)) != EOf) {
-if (c.find(myarg)) {
-std::cout << c << std::endl;
-} 
+
+//while ((c = gets(stream)) != EOF) {
+//if (c.find(myarg)) {
+//std::cout << c << std::endl;
+//} 
 }
 
 fclose(stream);
 }
 
-void writepipe(int file) {
+void writepipe(int file, std::string filepath) {
 FILE *stream;
 stream = fdopen(file, "w");
 std::ofstream myfile(filepath);
-while (getline(myfile ,line) != EOF) {
-stream << line << \n;
+std::string line;
+while (getline(myfile, line) != EOF) {
+std::fprintf (stream, line);
 }
 fclose(stream);
 myfile.close();
@@ -46,12 +48,12 @@ pid = fork();
 
 if (pid == (pid_t) 0) {  // child
 close(mypipe[1]);
-readpipe(mypipe[0]);
+readpipe(mypipe[0], myarg);
 // do something with the writing
 } else if (pid < (pid_t) 0) {
 // failed
 } else {   // parent
 close(mypipe[0]);
-writepipe(mypipe[1]);
+writepipe(mypipe[1], filepath);
 }
 }
