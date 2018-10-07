@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void readpipe(int file, std::string myarg) {
+void readpipe(int file) {
 FILE *stream;
 std::string *c;
 stream =fdopen (file, "r");
@@ -23,6 +23,7 @@ stream = fdopen(file, "w");
 std::ofstream myfile(filepath);
 std::string line;
 while (getline(myfile, line) != EOF) {
+std::cout << line<< std::endl;
 std::fprintf (stream, line);
 }
 fclose(stream);
