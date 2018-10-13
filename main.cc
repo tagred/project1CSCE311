@@ -23,8 +23,8 @@ stream = fdopen(file, "w");
 std::ofstream myfile(filepath);
 std::string line;
 while (getline(myfile, line) != EOF) {
-std::cout << line<< std::endl;
-std::fprintf (stream, line);
+stream << line<< std::endl;
+//std::fprintf (stream, line);
 }
 fclose(stream);
 myfile.close();
