@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 
 void readpipe(int file, std::string myarg) {
 FILE *stream;
@@ -16,26 +17,22 @@ fgets(temp, 200, stream);
 std::cout<< temp << std::endl;
 array.push_back(temp);
 }
-
 fclose(stream);
+std::sort(array.begin(), array.end());
+for(std::vector<std::string>::iterator it = array.begin(); it != array.end(); ++it) {
+    if(it.find(myarg)) {
+std::cout << *it << std::endl;
+}
+}
 }
 
 void writepipe(int file, std::string filepath) {
 FILE *stream;
 stream = fdopen(file, "w");
-<<<<<<< Updated upstream
-std::ofstream myfile(filepath);
-std::string line;
-while (getline(myfile, line) != EOF) {
-stream << line<< std::endl;
-//std::fprintf (stream, line);
-=======
 std::ifstream myfile(filepath);
 std::string temp;
 while(std::getline(myfile, temp)) {
-std::cout<< temp << std::endl;
 fputs(temp.c_str(), stream);
->>>>>>> Stashed changes
 }
 myfile.close();
 fclose(stream);
@@ -71,4 +68,5 @@ readpipe(mypipe[0], myarg);
 close(mypipe[0]);
 writepipe(mypipe[1], myfile);
 }
+return 1;
 }
