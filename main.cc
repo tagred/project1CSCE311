@@ -5,23 +5,34 @@
 #include <vector>
 #include <sstream>
 #include <algorithm>
+#include <cstring>
+#include <regex>
+
+
 
 void readpipe(int file, std::string myarg) {
 FILE *stream;
 stream =fdopen (file, "r");
 std::vector<std::string> array;
 std::stringstream ss;
-char temp[200];
+char temp[2000];
 while(!feof(stream)) {
-fgets(temp, 200, stream);
-std::cout<< temp << std::endl;
+fgets(temp, 2000, stream);
+if (std::strlen(temp) != 2)
 array.push_back(temp);
 }
 fclose(stream);
+ 
+std::string myregex = "[^A-z](";
+myregex.append(myarg);
+myregex.append(")[^A-z]");
+std::regex e (myregex, std::regex_constants::icase);
+
 std::sort(array.begin(), array.end());
+
 for(std::vector<std::string>::iterator it = array.begin(); it != array.end(); ++it) {
-    if(it.find(myarg)) {
-std::cout << *it << std::endl;
+    if(std::regex_search(*it,e)) {
+std::cout << *it;
 }
 }
 }
@@ -32,7 +43,12 @@ stream = fdopen(file, "w");
 std::ifstream myfile(filepath);
 std::string temp;
 while(std::getline(myfile, temp)) {
+//std::cout << temp << std::endl;
+if(temp.compare("") != 0){
+temp.append("\n");
 fputs(temp.c_str(), stream);
+}
+temp = "";
 }
 myfile.close();
 fclose(stream);
@@ -42,11 +58,10 @@ fclose(stream);
 
 
 int main(int argc, char *argv[]) {
-if (argc == 1) {  // check to see for valid amount of arguments
+if (argc != 3) {  // check to see for valid amount of arguments
 std::cout << "invalid args" << std::endl;
 return 0;
 }
-
 std::string myfile =argv[1];
 std::string myarg = argv[2];
 pid_t pid;
