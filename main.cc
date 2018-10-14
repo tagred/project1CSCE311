@@ -52,12 +52,14 @@ temp = "";
 }
 myfile.close();
 fclose(stream);
-
 }
 
 
 
 int main(int argc, char *argv[]) {
+
+
+
 if (argc != 3) {  // check to see for valid amount of arguments
 std::cout << "invalid args" << std::endl;
 return 0;
@@ -77,11 +79,15 @@ if (pid == (pid_t) 0) {  // child
 close(mypipe[1]);
 readpipe(mypipe[0], myarg);
 // do something with the writing
+
+
 } else if (pid < (pid_t) 0) {
 // failed
 } else {   // parent
 close(mypipe[0]);
 writepipe(mypipe[1], myfile);
 }
+
+
 return 1;
 }
