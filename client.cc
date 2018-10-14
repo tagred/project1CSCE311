@@ -36,7 +36,9 @@ int main(int argc, char *argv[]) {
 std::string filepath;
 std::string myarg;
 std::string line;
+std::cout << "Enter the path of the file" << std::endl;
 std::cin >> filepath;
+std::cout << "Enter the search term" << std::endl;
 std::cin >> myarg;
 std::ifstream myfile(filepath);
 write(fd, myarg.c_str(), 1024);

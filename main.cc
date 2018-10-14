@@ -14,7 +14,6 @@ void readpipe(int file, std::string myarg) {
 FILE *stream;
 stream =fdopen (file, "r");
 std::vector<std::string> array;
-std::stringstream ss;
 char temp[2000];
 while(!feof(stream)) {
 fgets(temp, 2000, stream);
@@ -62,6 +61,7 @@ int main(int argc, char *argv[]) {
 
 if (argc != 3) {  // check to see for valid amount of arguments
 std::cout << "invalid args" << std::endl;
+std::cout << "Proper use: ./01hw (PATH) (WORD)" << std::endl;
 return 0;
 }
 std::string myfile =argv[1];
