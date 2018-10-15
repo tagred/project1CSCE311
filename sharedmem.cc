@@ -7,6 +7,19 @@
 #include <fstream>
 #include <cstring>
 #include <fcntl.h>
+#include <vector>
+#include <algorithm>
+#include <regex>
+std::vector<std::string> map(std::vector<std::string> array, std::regex e) {
+std::vector<std::string> new_Vec;
+
+for(std::vector<std::string>::iterator it = array.begin(); it != array.end(); ++it) {
+    if(std::regex_search(*it,e)) {
+new_Vec.push_back(*it);
+}
+}
+return new_Vec;
+}
 
 
 int main(int argc, char *argv[]) {
