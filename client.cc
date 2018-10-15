@@ -10,8 +10,7 @@ char *socket_path = "\0hidden";
 
 int main(int argc, char *argv[]) {
   struct sockaddr_un addr;
-  char buf[1024];
-  int fd,rc;
+  int fd;
 
   if (argc > 1) socket_path=argv[1];
 

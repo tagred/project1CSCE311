@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
 
 if (argc != 3) {  // check to see for valid amount of arguments
 std::cout << "invalid args" << std::endl;
-std::cout << "Proper use: ./01hw (PATH) (WORD)" << std::endl;
+std::cout << "Proper use: ./pipe (PATH) (WORD)" << std::endl;
 return 0;
 }
 std::string myfile =argv[1];
