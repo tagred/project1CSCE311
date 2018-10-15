@@ -73,6 +73,7 @@ for(std::vector<std::string>::iterator it = array.begin(); it != array.end(); ++
 std::cout << *it;
 }
 }
+break;
 }
 
 
